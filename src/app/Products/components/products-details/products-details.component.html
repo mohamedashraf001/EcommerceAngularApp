@@ -1,0 +1,22 @@
+<div class=" h-screen p-6 mb-80 lg:mb-0 mt-20 lg:mt-0">
+
+    <!-- Main Content -->
+    <div class="lg:grid lg:grid-cols-2 gap-6 lg:mt-40">
+             <!-- Right Section: Product Image -->
+        <div class=" ">
+            <img src="{{product.image}}" alt="Jordan Air Shoe" class="w-full max-h-[520px] ">
+          </div>
+      <!-- Left Section: Product Info -->
+      <div class="space-y-4">
+        <h1 class="text-4xl font-bold text-gray-400 mt-30 ">{{product.title}}</h1>
+        <p class="text-white-600">{{product.description}}</p>
+        <button (click)="addToCart(product, 1)" class="bg-orange-400 text-white py-2 px-4 rounded-lg hover:bg-gray-700">
+           Add To Card
+        </button>
+      </div>
+  
+ 
+  
+    </div>
+  </div>
+  

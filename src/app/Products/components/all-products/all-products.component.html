@@ -1,0 +1,38 @@
+<app-home-image></app-home-image> 
+<app-home-text></app-home-text>
+
+<div class="w-full max-w-xs mb-5 lg:ml-32 ml-5 p-4 bg-white shadow-lg rounded-lg">
+  <label class="Categories">Categories</label>
+  
+  <select class="text-cyan-400 ml-5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:rounded-lg transition duration-300 ease-in-out hover:bg-orange-50" (change)="filterCategory($event)">
+    <option value="all">All</option>
+    @for(item of categories;track item.id){
+      <option value="{{item}}">{{item}}</option>
+    }
+  </select>
+
+</div>  
+
+<div class="mx-9 sm:mx-52 lg:flex justify-start space-x-6">
+ 
+
+    <div class="lg:grid lg:grid-rows-2 lg:grid-cols-6 lg:mb-4 lg:gap-6">
+      @for(product of products; track product.id){
+        <div class="relative lg:items-center my-4 lg:my-0 shadow-lg " routerLink="/productDetails/{{product.id}}" >
+          <img class="hover:h-72 hover:duration-500 lg:hover:h-28 h-60 lg:h-24 rounded-md" src="{{product.image}}">
+          <!-- Price in Top Right -->
+          <div class="absolute mr-7 lg:mr-0 top-2 right-6 lg:right-2 bg-white bg-opacity-70 text-orange-500 px-2 py-1 rounded-md text-xs font-semibold">Price: ${{product.price}}</div>
+          <!-- Cart Icon in Bottom Right -->
+          <div (click)="addToCart(product, 1)" class="absolute hover:bg-orange-600 bottom-10  lg:bottom-2 right-2  bg-cyan-500 text-white p-2 rounded-full cursor-pointer mr-7 lg:mr-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="lg:w-4 lg:h-4 w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18l-3 12H6L3 3z"/>
+            </svg>
+          </div>
+          <h1 class="ml-3 text-sm lg:text-xs text-gray-400 font-semibold lg:bottom-7">{{product.title}}rounded-full cursor-pointer</h1>
+        </div>
+      }  
+    </div>  
+  
+
+
+</div>

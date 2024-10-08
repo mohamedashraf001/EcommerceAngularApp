@@ -1,0 +1,141 @@
+<div class="mt-14 lg:flex lg:justify-between lg:p-10 p-4 bg-gray-50 min-h-screen">
+  
+    <!-- Left Section: Shopping Cart -->
+    <div class="w-full lg:w-2/3 bg-white p-6 rounded-lg shadow-lg">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">Shopping Cart</h2>
+      
+      <!-- Product List -->
+       @for(item of cartProducts; track item.id;let index=$index ){ 
+        <div  class="flex justify-between items-center border-b py-4">
+            <div class="flex items-center">
+              <img class="w-16 h-16 rounded-md" src="{{item.item.image}}">
+              <div class="ml-4">
+                <h3 class="text-lg font-semibold text-gray-700">{{item.item.title}} </h3>
+             
+              </div>
+            </div>
+      
+           
+      
+            <!-- Price -->
+            <div class="flex text-gray-800 font-bold ml-10">
+                {{item.item.price}}<span class="ml-2 mr-2 text-green-400">$</span>
+            </div>
+      
+            <!-- Remove Item -->
+            <button class="text-red-500 hover:text-red-700" (click)="deleteProduct(index)">x</button>
+          </div>
+       }
+      
+  
+      <!-- Continue Shopping Button -->
+      <div class="mt-6 flex justify-between">
+        <button routerLink="/products" class="bg-orange-500 h-14 text-white py-2 px-4 rounded hover:bg-gray-700">Continue Shopping ...</button>
+        <img (click)="deleteAll()" class="h-7 mr-10 hover:h-10 duration-500" src="https://cdn-icons-png.flaticon.com/512/216/216785.png">
+      </div>
+    </div>
+  
+    <!-- Right Section: Payment Info -->
+    <div class="w-full lg:w-1/3 mt-10 lg:mt-0 lg:ml-10 bg-cyan-200 p-6 rounded-lg shadow-lg shadow--600">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">Payment Info</h2>
+  
+      <!-- Payment Form -->
+      <form [formGroup]="form">
+        <div class="space-y-4">
+          <!-- Payment Method -->
+          <label class="block font-semibold text-gray-700">Payment Method</label>
+          <div class="flex space-x-4">
+            <button class="p-2 w-full bg-gray-100 rounded-lg hover:bg-gray-200">Credit Card</button>
+            <button class="p-2 w-full bg-gray-100 rounded-lg hover:bg-gray-200">Cash</button>
+          </div>
+      
+          <!-- Name Field -->
+          <div class="space-y-2">
+            <label class="block font-semibold text-gray-700">Name <span class="text-red-500">*</span></label>
+            <input
+              class="w-full p-2 border rounded-lg"
+              formControlName="title"
+              type="text"
+              placeholder="Name"
+              required
+            />
+            @if(submitted==false){
+            <div class="text-red-500 text-sm error-message">
+              Name is required
+            </div>}
+          </div>
+      
+          <!-- Phone Field -->
+           
+          <div class="space-y-2">
+           
+              <label class="block font-semibold text-gray-700">Phone <span class="text-red-500">*</span></label>
+              <input
+                class="w-full p-2 border rounded-lg"
+                formControlName="Phone"
+                type="number"
+                placeholder="Phone"
+                required
+              />
+              @if(submitted==false){
+                <div class="text-red-500 text-sm error-message">
+                  Phone is required
+                </div>
+              }
+              
+            
+           
+            
+          </div>
+      
+          <!-- Email Field -->
+          <div class="space-y-2">
+            <label class="block font-semibold text-gray-700">Email <span class="text-red-500">*</span></label>
+            <input
+              class="w-full p-2 border rounded-lg"
+              formControlName="email"
+              type="email"
+              placeholder="Email"
+              required
+            />
+            @if(submitted==false){
+            <div class="text-red-500 text-sm error-message">
+              A valid email is required
+            </div>}
+          </div>
+      
+          <!-- Checkout Button -->
+          <div class="mt-4" (click)="sendCart()">
+            <button
+              type="submit"
+              [disabled]="!form.valid"
+              class="w-full bg-blue-500 text-white py-3 px-6 rounded-lg hover:bg-blue-600"
+            >
+              Order Now
+            </button>
+          </div>
+        </div>
+      </form>
+      
+      
+     
+    </div>
+
+    
+    <div class=" bg-blue-900 text-white p-5 w-full lg:w-1/3">
+        <h3 class="text-xl mb-5">Summary</h3>
+        <p class="mb-5">Estimate Shipping and Tax</p>
+        <div class="summary-detail mb-5">
+          <p>Subtotal: <span id="subtotal" class="float-right">${{totalPrice}}</span></p>
+          <p>Tax: <span id="tax" class="float-right">$16.99</span></p>
+          <p>Total: <span id="total" class="float-right">${{afterDiscound}}</span></p>
+        </div>
+         <div class="space-y-2">
+          <label class="block font-semibold text-white mb-4">Apply Discound Code</label>
+          <input class="w-full p-2 border rounded-lg " type="text" placeholder="code">
+        </div>
+        <button class="w-full bg-green-600 mt-7 text-white py-2 rounded-md hover:bg-green-700 transition-all">Apply</button>
+      </div>
+      
+  </div>
+    
